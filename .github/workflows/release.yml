@@ -28,6 +28,8 @@ jobs:
             target: aarch64-apple-darwin
           - os: windows-latest
             target: x86_64-pc-windows-msvc
+          - os: ubuntu-24.04-arm
+            target: aarch64-unknown-linux-gnu
 
     name: build (${{ matrix.target }})
     runs-on: ${{ matrix.os }}
@@ -112,6 +114,7 @@ jobs:
             ## Downloads
             Choose the appropriate binary for your platform:
             - Linux x86_64: `systemd-lsp-x86_64-unknown-linux-gnu`
+            - Linux ARM64: `systemd-lsp-aarch64-unknown-linux-gnu`
             - macOS Intel: `systemd-lsp-x86_64-apple-darwin`
             - macOS Apple Silicon: `systemd-lsp-aarch64-apple-darwin`
             - Windows: `systemd-lsp-x86_64-pc-windows-msvc.exe`
