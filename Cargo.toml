@@ -34,7 +34,7 @@ tower-lsp-server = "0.23.0"
 tokio = { version = "1.0", features = ["full"] }
 serde = { version = "1.0", features = ["derive"] }
 serde_json = "1.0"
-thiserror = "1.0"
+thiserror = "2.0"
 regex = "1.12"
 dashmap = "6.1"
 log = "0.4"
