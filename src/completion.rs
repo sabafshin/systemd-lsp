@@ -2,7 +2,7 @@ use crate::constants::SystemdConstants;
 use crate::parser::SystemdParser;
 use log::{debug, trace};
 use std::collections::HashMap;
-use tower_lsp_server::lsp_types::{
+use tower_lsp_server::ls_types::{
     CompletionItem, CompletionItemKind, CompletionResponse, Documentation, MarkupContent,
     MarkupKind, Position, Uri,
 };
@@ -497,7 +497,7 @@ impl SystemdCompletion {
 #[cfg(test)]
 mod tests {
     use super::*;
-    use tower_lsp_server::lsp_types::{Position, Uri};
+    use tower_lsp_server::ls_types::{Position, Uri};
 
     #[tokio::test]
     async fn test_completion_creation() {
