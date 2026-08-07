@@ -23,7 +23,7 @@
           pname = cargo.package.name;
           version = cargo.package.version;
           src = self;
-          cargoHash = "sha256-VOL+PShh/NCNJIPLFoD2bLuDtWdOBWBeoX7BqTk8++o=";
+          cargoHash = "sha256-2ipDxewXYUBhCC397yb3znozlfX1jL/e4p7vwAzZ4+w=";
 
           # Skip tests - integration tests need the built binary which isn't available in sandbox
           doCheck = false;

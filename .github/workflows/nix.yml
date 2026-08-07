@@ -3,7 +3,7 @@ on:
   push:
     branches:
       - main
-
+  pull_request:
 jobs:
   build-nix:
     runs-on: ubuntu-latest
@@ -13,14 +13,13 @@ jobs:
         with:
           github_access_token: ${{ secrets.GITHUB_TOKEN }}
       - name: Build
-        id: build
-        uses: mathiasvr/command-output@v2.0.0
-        with:
-          run: nix build
-      - name: Calculate cargoHash
-        if: "failure() && contains(steps.build.outputs.stderr, 'ERROR: cargoHash or cargoSha256 is out of date')"
+        run: nix build .#default
+      - name: Report cargoHash if stale
+        if: failure()
         run: |
           sed -i -E 's/cargoHash = ".+";/cargoHash = "";/g' flake.nix
           hash=$(nix build 2>&1 | sed -n -E 's/.*got: +([^ ]+).*/\1/p')
-          line=$(awk '/cargoHash/ { print NR }' flake.nix)
-          echo "::error file=flake.nix,line=$line,::cargoHash is out of date. Should be: $hash"
+          if [ -n "$hash" ]; then
+            line=$(awk '/cargoHash/ { print NR }' flake.nix)
+            echo "::error file=flake.nix,line=$line,::cargoHash is out of date. Should be: $hash"
+          fi
